@@ -253,7 +253,7 @@ set(fig, ...
     'PaperUnits','Inches', ...
     'PaperSize',[pos(3),pos(4)]);
 
-savePath = '/Users/bjoshi/Library/CloudStorage/Dropbox/BifuncMSS/MatlabPlotting/';
+savePath = 'MatlabPlotting';
 
 print(fig, [savePath networkPattern '_substrates.png'], '-dpng', '-r300');
 print(fig, [savePath networkPattern '_substrates.pdf'], '-dpdf', '-r300', '-painters');
