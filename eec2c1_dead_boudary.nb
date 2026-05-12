@@ -1,0 +1,667 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23508,        659]
+NotebookOptionsPosition[     22714,        637]
+NotebookOutlinePosition[     23109,        653]
+CellTagsIndexPosition[     23066,        650]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Clear", " ", "all", " ", "global", " ", "variables"}], "*)"}], 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", 
+      RowBox[{"SYSTEM", " ", "DEFINITION"}]}], "===", "=="}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Conservation", " ", "laws"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"e", ":=", 
+     RowBox[{"Te", "-", "c1", "-", "c2", "-", "c3", "-", "c4"}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"s0", ":=", 
+     RowBox[{"Ts", "-", "s1", "-", "s2", "-", "c1", "-", "c2", "-", 
+      RowBox[{"2", " ", "c3"}], "-", 
+      RowBox[{"2", " ", "c4"}]}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"G", " ", "equations", " ", "for", " ", 
+     RowBox[{"(", 
+      RowBox[{"E", ",", "E", ",", "C2", ",", "C1"}], ")"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"G1", ":=", 
+     RowBox[{
+      RowBox[{"kP1", "*", "s0", "*", "e"}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"kM1", "+", "k1"}], ")"}], "*", "c1"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"G2", ":=", 
+     RowBox[{
+      RowBox[{"kP2", "*", "s1", "*", "e"}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"kM2", "+", "k2"}], ")"}], "*", "c2"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"G3", ":=", 
+     RowBox[{
+      RowBox[{"kP3", "*", "s2", "*", "c2"}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"kM3", "+", "k3"}], ")"}], "*", "c3"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"G4", ":=", 
+     RowBox[{
+      RowBox[{"kP4", "*", "s1", "*", "c1"}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"kM4", "+", "k4"}], ")"}], "*", "c4"}]}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"L", " ", "equations"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"L0", ":=", 
+     RowBox[{
+      RowBox[{"k4", "*", "c4"}], "-", 
+      RowBox[{"k1", "*", "c1"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"L1", ":=", 
+     RowBox[{
+      RowBox[{"k1", "*", "c1"}], "-", 
+      RowBox[{"k4", "*", "c4"}], "+", 
+      RowBox[{"k3", "*", "c3"}], "-", 
+      RowBox[{"k2", "*", "c2"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"L2", ":=", 
+     RowBox[{
+      RowBox[{"k2", "*", "c2"}], "-", 
+      RowBox[{"k3", "*", "c3"}]}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "ODEs"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fc1", "[", 
+      RowBox[{
+      "c1_", ",", "c2_", ",", "c3_", ",", "c4_", ",", "s1_", ",", "s2_"}], 
+      "]"}], ":=", 
+     RowBox[{"G1", "-", "G4"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fc2", "[", 
+      RowBox[{
+      "c1_", ",", "c2_", ",", "c3_", ",", "c4_", ",", "s1_", ",", "s2_"}], 
+      "]"}], ":=", 
+     RowBox[{"G2", "-", "G3"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fc3", "[", 
+      RowBox[{
+      "c1_", ",", "c2_", ",", "c3_", ",", "c4_", ",", "s1_", ",", "s2_"}], 
+      "]"}], ":=", "G3"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fc4", "[", 
+      RowBox[{
+      "c1_", ",", "c2_", ",", "c3_", ",", "c4_", ",", "s1_", ",", "s2_"}], 
+      "]"}], ":=", "G4"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fs1", "[", 
+      RowBox[{
+      "c1_", ",", "c2_", ",", "c3_", ",", "c4_", ",", "s1_", ",", "s2_"}], 
+      "]"}], ":=", 
+     RowBox[{"L1", "-", "G2", "-", "G4"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fs2", "[", 
+      RowBox[{
+      "c1_", ",", "c2_", ",", "c3_", ",", "c4_", ",", "s1_", ",", "s2_"}], 
+      "]"}], ":=", 
+     RowBox[{"L2", "-", "G3"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Vector", " ", "of", " ", "functions"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"fc1", "[", 
+        RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}],
+         "]"}], ",", 
+       RowBox[{"fc2", "[", 
+        RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}],
+         "]"}], ",", 
+       RowBox[{"fc3", "[", 
+        RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}],
+         "]"}], ",", 
+       RowBox[{"fc4", "[", 
+        RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}],
+         "]"}], ",", 
+       RowBox[{"fs1", "[", 
+        RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}],
+         "]"}], ",", 
+       RowBox[{"fs2", "[", 
+        RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}],
+         "]"}]}], "}"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", "Variables", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vars", "=", 
+     RowBox[{"{", 
+      RowBox[{"c1", ",", "c2", ",", "c3", ",", "c4", ",", "s1", ",", "s2"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", 
+      RowBox[{"JACOBIAN", " ", "MATRIX"}]}], "===", "=="}], "*)"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Original", " ", "Jacobian"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Jog", "=", 
+     RowBox[{"D", "[", 
+      RowBox[{"f", ",", 
+       RowBox[{"{", "vars", "}"}]}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Jacobian", " ", "with", " ", "conservation", " ", "laws", " ", 
+     "substituted"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"J", "=", 
+     RowBox[{"Jog", "/.", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Te", "->", 
+         RowBox[{"en", "+", "c1", "+", "c2", "+", "c3", "+", "c4"}]}], ",", 
+        RowBox[{"Ts", "->", 
+         RowBox[{"s0n", "+", "s1", "+", "s2", "+", "c1", "+", "c2", "+", 
+          RowBox[{"2", " ", "c3"}], "+", 
+          RowBox[{"2", " ", "c4"}]}]}]}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", 
+      RowBox[{"RATE", " ", "CONSTANTS"}]}], "===", "=="}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Rate", " ", "constants", " ", "for", " ", "2", " ", "pss"}], 
+    "*)"}], 
+   RowBox[{
+    RowBox[{"k1", "=", "2.04"}], ";", 
+    RowBox[{"k2", "=", "3"}], ";", 
+    RowBox[{"k3", "=", "1"}], ";", 
+    RowBox[{"k4", "=", "8.15"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"kP1", "=", "38.33"}], ";", 
+    RowBox[{"kP2", "=", "6"}], ";", 
+    RowBox[{"kP3", "=", "6"}], ";", 
+    RowBox[{"kP4", "=", "4.08"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"kM1", "=", "2.04"}], ";", 
+    RowBox[{"kM2", "=", "3"}], ";", 
+    RowBox[{"kM3", "=", "1"}], ";", 
+    RowBox[{"kM4", "=", "8.15"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Te", "=", "10.8"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"(*", 
+     RowBox[{"Rate", " ", "constants", " ", "for", " ", "1", " ", "pss"}], 
+     "*)"}], "\n", 
+    RowBox[{
+     RowBox[{"k1", "=", "1.04"}], ";", 
+     RowBox[{"k2", "=", "1"}], ";", 
+     RowBox[{"k3", "=", "1"}], ";", 
+     RowBox[{"k4", "=", "1.25"}], ";", "\n", 
+     RowBox[{"kP1", "=", "3.33"}], ";", 
+     RowBox[{"kP2", "=", "2"}], ";", 
+     RowBox[{"kP3", "=", "1.3"}], ";", 
+     RowBox[{"kP4", "=", "1.08"}], ";", "\n", 
+     RowBox[{"kM1", "=", "1.04"}], ";", 
+     RowBox[{"kM2", "=", "1"}], ";", 
+     RowBox[{"kM3", "=", "1"}], ";", 
+     RowBox[{"kM4", "=", "2.15"}], ";", "\n", 
+     RowBox[{"Te", "=", "1.8"}], ";"}], "*)"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Derived", " ", "parameters"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ks1", "=", 
+     RowBox[{"k1", "*", 
+      RowBox[{"kP1", "/", 
+       RowBox[{"(", 
+        RowBox[{"k1", "+", "kM1"}], ")"}]}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"ks2", "=", 
+     RowBox[{"k2", "*", 
+      RowBox[{"kP2", "/", 
+       RowBox[{"(", 
+        RowBox[{"k2", "+", "kM2"}], ")"}]}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"ks3", "=", 
+     RowBox[{"k3", "*", 
+      RowBox[{"kP3", "/", 
+       RowBox[{"(", 
+        RowBox[{"k3", "+", "kM3"}], ")"}]}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"ks4", "=", 
+     RowBox[{"k4", "*", 
+      RowBox[{"kP4", "/", 
+       RowBox[{"(", 
+        RowBox[{"k4", "+", "kM4"}], ")"}]}]}]}], ";"}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", 
+      RowBox[{"BIFURCATION", " ", "ANALYSIS"}]}], "===", "=="}], "*)"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Set", " ", "Ts", " ", "range", " ", "and", " ", "step", " ", "size"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Tsmin", "=", "0"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Tsmax", "=", "20"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"stepSize", "=", "0.01"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Set", " ", "export", " ", "directory"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "exportDir", "=", 
+     "\"\</Users/bjoshi/Library/CloudStorage/Dropbox/BifuncMSS/\
+BifDataForPlotting/\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"DirectoryQ", "[", "exportDir", "]"}]}], ",", 
+      RowBox[{"CreateDirectory", "[", "exportDir", "]"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Range", " ", "of", " ", "Ts", " ", "values"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"TsValues", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{"Ts", ",", 
+       RowBox[{"{", 
+        RowBox[{"Ts", ",", "Tsmin", ",", "Tsmax", ",", "stepSize"}], "}"}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Storage", " ", "for", " ", "bifurcation", " ", "data"}], "*)"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"bifurcationData", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"stabilityData", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"variableData", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Loop", " ", "over", " ", "Ts", " ", "values"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Computing bifurcation diagram...\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{"(*", 
+      RowBox[{"Dead", " ", 
+       RowBox[{"boundary", ":", 
+        RowBox[{
+        "all", " ", "variables", " ", "are", " ", "zero", " ", "except", " ", 
+         "s2", " ", "and", " ", "e"}]}]}], "*)"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"c1Val", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"c2Val", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"c3Val", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"c4Val", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"s0Val", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"s1Val", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"s2Val", "=", "TsVal"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"eVal", "=", "Te"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Calculate", " ", "Jacobian", " ", "at", " ", "the", " ", "dead", " ",
+          "boundary"}], "*)"}], 
+       RowBox[{"JacVal", "=", 
+        RowBox[{"J", "/.", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"c1", "->", "0"}], ",", 
+           RowBox[{"c2", "->", "0"}], ",", 
+           RowBox[{"c3", "->", "0"}], ",", 
+           RowBox[{"c4", "->", "0"}], ",", 
+           RowBox[{"s1", "->", "0"}], ",", 
+           RowBox[{"s2", "->", "TsVal"}], ",", 
+           RowBox[{"s0n", "->", "0"}], ",", 
+           RowBox[{"en", "->", "Te"}]}], "}"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Calculate", " ", "eigenvalues"}], "*)"}], 
+       RowBox[{"eigenvals", "=", 
+        RowBox[{"Eigenvalues", "[", "JacVal", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"maxRealPart", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"Re", "[", "eigenvals", "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Determine", " ", "stability"}], "*)"}], 
+       RowBox[{"stable", "=", 
+        RowBox[{"maxRealPart", "<", "0"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Store", " ", "data"}], "*)"}], 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"bifurcationData", ",", 
+         RowBox[{"{", "TsVal", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"stabilityData", ",", 
+         RowBox[{"{", 
+          RowBox[{"TsVal", ",", "stable"}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"variableData", ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "TsVal", ",", "c1Val", ",", "c2Val", ",", "c3Val", ",", "c4Val", 
+           ",", "eVal", ",", "s0Val", ",", "s1Val", ",", "s2Val", ",", 
+           "stable"}], "}"}]}], "]"}], ";"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"TsVal", ",", "TsValues"}], "}"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<Computation complete. Processing data...\>\"", "]"}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", 
+      RowBox[{"NETWORK", " ", "NAME"}]}], "===", "=="}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"networkName", "=", "\"\<eec2c1_2pss_dead_boundary\>\""}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", 
+      RowBox[{"EXPORT", " ", "DATA"}]}], "===", "=="}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Separate", " ", "stable", " ", "and", " ", "unstable", " ", "branches"}],
+     "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"stableBranch", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{"stabilityData", ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "==", "True"}], "&"}]}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"unstableBranch", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{"stabilityData", ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "==", "False"}], "&"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Prepare", " ", "data", " ", "for", " ", "export"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"stableData", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{"variableData", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "10", "]"}], "]"}], "==", "True"}], "&"}]}], "]"}], 
+       ",", 
+       RowBox[{"ConstantArray", "[", 
+        RowBox[{
+         RowBox[{"{", "1", "}"}], ",", 
+         RowBox[{"Length", "[", 
+          RowBox[{"Select", "[", 
+           RowBox[{"variableData", ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "10", "]"}], "]"}], "==", "True"}], "&"}]}], 
+           "]"}], "]"}]}], "]"}], ",", "2"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"unstableData", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{"variableData", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "10", "]"}], "]"}], "==", "False"}], "&"}]}], "]"}], 
+       ",", 
+       RowBox[{"ConstantArray", "[", 
+        RowBox[{
+         RowBox[{"{", "0", "}"}], ",", 
+         RowBox[{"Length", "[", 
+          RowBox[{"Select", "[", 
+           RowBox[{"variableData", ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "10", "]"}], "]"}], "==", "False"}], "&"}]}], 
+           "]"}], "]"}]}], "]"}], ",", "2"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"allData", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{"stableData", ",", "unstableData"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Create", " ", "header"}], "-", 
+     RowBox[{"note", " ", "v", " ", "is", " ", "NOT", " ", "included"}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"header", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Ts\>\"", ",", "\"\<c1\>\"", ",", "\"\<c2\>\"", ",", "\"\<c3\>\"", 
+       ",", "\"\<c4\>\"", ",", "\"\<e\>\"", ",", "\"\<s0\>\"", ",", 
+       "\"\<s1\>\"", ",", "\"\<s2\>\"", ",", "\"\<stable\>\"", ",", 
+       "\"\<stability_flag\>\""}], "}"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Export", " ", "bifurcation", " ", "data", " ", "to", " ", "CSV"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{
+      "exportDir", "<>", "networkName", "<>", "\"\<_bifdata.csv\>\""}], ",", 
+      RowBox[{"Prepend", "[", 
+       RowBox[{"allData", ",", "header"}], "]"}], ",", "\"\<CSV\>\""}], "]"}],
+     ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Export", " ", "eigenvalue", " ", "data"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"eigenData", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"variableData", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+         RowBox[{"(*", "Ts", "*)"}], 
+         RowBox[{"(*", 
+          RowBox[{
+          "Get", " ", "eigenvalue", " ", "from", " ", "stored", " ", "data"}],
+           "*)"}], 
+         RowBox[{
+          RowBox[{"JacVal", "=", 
+           RowBox[{"J", "/.", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"c1", "->", "0"}], ",", 
+              RowBox[{"c2", "->", "0"}], ",", 
+              RowBox[{"c3", "->", "0"}], ",", 
+              RowBox[{"c4", "->", "0"}], ",", 
+              RowBox[{"s1", "->", "0"}], ",", 
+              RowBox[{"s2", "->", 
+               RowBox[{"variableData", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "1"}], "]"}], "]"}]}], ",", 
+              RowBox[{"s0n", "->", "0"}], ",", 
+              RowBox[{"en", "->", "Te"}]}], "}"}]}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Max", "[", 
+           RowBox[{"Re", "[", 
+            RowBox[{"Eigenvalues", "[", "JacVal", "]"}], "]"}], "]"}]}], ",", 
+         
+         RowBox[{"(*", 
+          RowBox[{"max", " ", "real", " ", "part"}], "*)"}], 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"variableData", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "10"}], "]"}], "]"}], ",", "1", ",", "0"}], 
+          "]"}]}], "  ", 
+        RowBox[{"(*", 
+         RowBox[{"stability", " ", "flag"}], "*)"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "variableData", "]"}]}], "}"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{
+      "exportDir", "<>", "networkName", "<>", "\"\<_eigdata.csv\>\""}], ",", 
+      RowBox[{"Prepend", "[", 
+       RowBox[{"eigenData", ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Ts\>\"", ",", "\"\<max_Re_lambda\>\"", ",", "\"\<stable\>\""}], 
+         "}"}]}], "]"}], ",", "\"\<CSV\>\""}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Data exported successfully to: \>\"", ",", "exportDir"}], 
+     "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<Files created: \>\"", "<>", "networkName", "<>", 
+      "\"\<_bifdata.csv, \>\"", "<>", "networkName", "<>", 
+      "\"\<_eigdata.csv\>\""}], "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.977578687819028*^9, 3.9775786878222017`*^9}, {
+  3.977579400404087*^9, 3.977579416451129*^9}, {3.977579670102686*^9, 
+  3.977579671179379*^9}},
+ CellLabel->
+  "In[1328]:=",ExpressionUUID->"699ba92a-4bdc-436e-b514-908a0743c049"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Computing bifurcation diagram...\"\>"], "Print",
+ CellChangeTimes->{3.977578692588871*^9, 3.977579419821645*^9, 
+  3.977579675166155*^9},
+ CellLabel->
+  "During evaluation of \
+In[1328]:=",ExpressionUUID->"f2996c17-fe88-456b-a891-f6c4156c16f8"],
+
+Cell[BoxData["\<\"Computation complete. Processing data...\"\>"], "Print",
+ CellChangeTimes->{3.977578692588871*^9, 3.977579419821645*^9, 
+  3.9775796754832172`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1328]:=",ExpressionUUID->"9967a19e-3d1b-48eb-bae2-df60355ee20c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Data exported successfully to: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/bjoshi/Library/CloudStorage/Dropbox/BifuncMSS/BifDataForPlotting/\
+\"\>"}],
+  SequenceForm[
+  "Data exported successfully to: ", 
+   "/Users/bjoshi/Library/CloudStorage/Dropbox/BifuncMSS/BifDataForPlotting/"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.977578692588871*^9, 3.977579419821645*^9, 
+  3.977579675685321*^9},
+ CellLabel->
+  "During evaluation of \
+In[1328]:=",ExpressionUUID->"6ea9acff-d795-4f8a-a118-7083b454247e"],
+
+Cell[BoxData["\<\"Files created: eec2c1_2pss_dead_boundary_bifdata.csv, \
+eec2c1_2pss_dead_boundary_eigdata.csv\"\>"], "Print",
+ CellChangeTimes->{3.977578692588871*^9, 3.977579419821645*^9, 
+  3.977579675686017*^9},
+ CellLabel->
+  "During evaluation of \
+In[1328]:=",ExpressionUUID->"1cefbaae-e109-4a70-a0ce-08f1dc0253b5"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{917, 789},
+WindowMargins->{{11, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.0 for Mac OS X ARM (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d2c064f2-f790-4bd8-8d47-ea30bf8eee89"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 20654, 571, 2887, "Input",ExpressionUUID->"699ba92a-4bdc-436e-b514-908a0743c049"],
+Cell[CellGroupData[{
+Cell[21259, 597, 262, 5, 24, "Print",ExpressionUUID->"f2996c17-fe88-456b-a891-f6c4156c16f8"],
+Cell[21524, 604, 272, 5, 24, "Print",ExpressionUUID->"9967a19e-3d1b-48eb-bae2-df60355ee20c"],
+Cell[21799, 611, 561, 14, 24, "Print",ExpressionUUID->"6ea9acff-d795-4f8a-a118-7083b454247e"],
+Cell[22363, 627, 323, 6, 24, "Print",ExpressionUUID->"1cefbaae-e109-4a70-a0ce-08f1dc0253b5"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
